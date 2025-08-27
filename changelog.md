@@ -1,3 +1,7 @@
+# v2.4.0
+
+- Add (fully) `timestepyt.secretlayer6` mod
+
 # v2.3.1
 
 - Bugfix: Clicking the settings button with Happy Textures installed crashes the game.

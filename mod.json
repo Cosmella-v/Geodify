@@ -487,6 +487,12 @@
             "type": "bool",
             "default": false
         },
+        "timestepyt.secretlayer6/SecretLayer6R": {
+            "name": "SecretLayer6R",
+            "description": "SecretLayer6R",
+            "type": "bool",
+            "default": false
+        },
         "other-title": {
             "type": "title",
             "name": "Other"

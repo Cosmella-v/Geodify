@@ -167,6 +167,7 @@ bool GYSettingSelectLayer::init() {
         { "GDCP List Integration", "GDCP Team + 2 more", "gdcpteam.challenge-list" },
         { "Random Tab", "Alphalaneous", "alphalaneous.random_tab" },
         { "Geometry Dash: Surge", "OmgRod", "omgrod.geometry-dash-surge" },
+        { "SecretLayer6", "TimeStepYT", "timestepyt.secretlayer6" },
     };
 
     for (const auto& [name, author, id] : modData) {

@@ -7,11 +7,9 @@ using namespace geode::prelude;
 
 class Tags {
 public:
-    // Constructor to initialize the tag-to-string and string-to-tag maps
     Tags() {
         log::debug("Initializing Tags...");
 
-        // Populate the maps directly (no hashing needed)
         m_tagMap = {
             {"gd-CreatorLayer", 0},
             {"gd-EditLevelLayer", 1},
@@ -79,11 +77,12 @@ public:
             {"omgrod.geometry-dash-surge-GDSIslandSelectLayer", 63},
             {"omgrod.geometry-dash-surge-GDSBasementLayer", 64},
             {"omgrod.geometry-dash-surge-GDSCreditsLayer", 65},
+            {"gd-SecretLayer5", 66},
+            {"timestepyt.secretlayer6-SecretLayer6R", 67},
         };
 
         log::debug("Tag map populated with {} entries.", m_tagMap.size());
 
-        // Populate the string-to-tag map
         m_stringMap = {
             {0, "gd-CreatorLayer"},
             {1, "gd-EditLevelLayer"},
@@ -151,12 +150,13 @@ public:
             {63, "omgrod.geometry-dash-surge-GDSIslandSelectLayer"},
             {64, "omgrod.geometry-dash-surge-GDSBasementLayer"},
             {65, "omgrod.geometry-dash-surge-GDSCreditsLayer"},
+            {66, "gd-SecretLayer5"},
+            {67, "timestepyt.secretlayer6-SecretLayer6R"},
         };
 
         log::debug("String map populated with {} entries.", m_stringMap.size());
     }
 
-    // Convert a string to a corresponding tag (integer)
     int getTagFromString(std::string name) {
         auto it = m_tagMap.find(name);
         if (it != m_tagMap.end()) {
@@ -167,7 +167,6 @@ public:
         return -1;
     }
 
-    // Convert an integer tag back to the corresponding string
     std::string getStringFromTag(int tag) {
         auto it = m_stringMap.find(tag);
         if (it != m_stringMap.end()) {
@@ -179,6 +178,6 @@ public:
     }
 
 private:
-    std::unordered_map<std::string, int> m_tagMap;    // Direct map for string -> tag
-    std::unordered_map<int, std::string> m_stringMap;  // Direct map for tag -> string
+    std::unordered_map<std::string, int> m_tagMap;
+    std::unordered_map<int, std::string> m_stringMap;
 };
