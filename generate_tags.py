@@ -24,7 +24,7 @@ for file in DIR.rglob("*.cpp"):
             match = MACRO_PATTERN.search(line)
 
         if match:
-            name, id_ = match.group(1), int(match.group(2))
+            name = match
             if "-" in name:
                 before_last, after_last = name.rsplit("-", 1)
             else:
