@@ -8,7 +8,7 @@ MOD_JSON_PATH_OUTPUT = Path("mod.json")
 COMMENT_PATTERN = re.compile(r'//\[\[omgrod\.geodify/TAG\]\]\s*([^\s:]+)')
 MACRO_PATTERN = re.compile(r'ADD_TAG\(\s*"([^"]+)"\s*\)')
 
-print("Looking in:", DIR.resolve())
+#print("Looking in:", DIR.resolve())
 
 tag_settings = {}
 for file in DIR.rglob("*.cpp"):
@@ -34,7 +34,7 @@ for file in DIR.rglob("*.cpp"):
 
             if key not in tag_settings:
                 tag_settings[key] = {
-                    "name": after_last.replace("_", " ").title(),
+                    "name": after_last.replace("_", " "),
                     "description": after_last,
                     "type": "bool",
                     "default": False
