@@ -31,7 +31,7 @@ bool GYModTile::init(std::string modName, std::string modAuthor, std::string mod
     }
     this->m_modID = mod ? mod->getID() : modID;
     this->m_modName = mod ? mod->getName() : modName;
-    this->m_modAuthor = mod ? mod->getMetadata().formatDeveloperDisplayString(mod->getDevelopers()) : modAuthor;
+    this->m_modAuthor = mod ? mod->getMetadataRef().formatDeveloperDisplayString(mod->getDevelopers()) : modAuthor;
     setMouseEnabled(true);
 
     auto winSize = CCDirector::sharedDirector()->getWinSize();

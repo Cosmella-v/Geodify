@@ -15,9 +15,9 @@
     "resources": {
         "sprites": [
             "res/*.png",
-            "res/joke/*.png",
-            "res/loops/ninxout.wav"
-        ]
+            "res/joke/*.png"
+        ],
+        "files" : ["res/loops/ninxout.wav"]
     },
     "settings": {
         "menu-loop": {
