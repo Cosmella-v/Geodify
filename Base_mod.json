@@ -15,7 +15,8 @@
     "resources": {
         "sprites": [
             "res/*.png",
-            "res/joke/*.png"
+            "res/joke/*.png",
+            "res/loops/ninxout.wav"
         ]
     },
     "settings": {
