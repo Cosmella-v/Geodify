@@ -21,15 +21,17 @@ GYModTile* GYModTile::create(std::string modName, std::string modAuthor, std::st
     delete ret;
     return nullptr;
 }
-
 bool GYModTile::init(std::string modName, std::string modAuthor, std::string modID) {
     if (!CCLayer::init())
         return false;
-
-    this->m_modID = modID;
-    this->m_modName = modName;
-    this->m_modAuthor = modAuthor;
     
+    geode::Mod* mod = nullptr;
+    if (modID != "gd") {
+        geode::Mod* mod = Loader::get()->getLoadedMod(modID);
+    }
+    this->m_modID = mod ? mod->getID() : modID;
+    this->m_modName = mod ? mod->getName() : modName;
+    this->m_modAuthor = mod ? mod->getMetadata().formatDeveloperDisplayString(mod->getDevelopers()) : modAuthor;
     setMouseEnabled(true);
 
     auto winSize = CCDirector::sharedDirector()->getWinSize();
@@ -76,14 +78,14 @@ bool GYModTile::init(std::string modName, std::string modAuthor, std::string mod
     menu->setAnchorPoint({ 0, 0 });
     menu->setContentSize({ this->getContentSize().width, this->getContentSize().height });
     menu->setPosition({ 0, 0 });
-
+    ButtonSprite* View =  ButtonSprite::create("View");
+    View->setScale(0.8);
     auto btn = CCMenuItemSpriteExtra::create(
-        ButtonSprite::create("View"),
+        View,
         this,
         menu_selector(GYModTile::viewMod)
     );
     btn->setPosition({ this->getContentSize().width / 2, winSize.height * 0.075f });
-    btn->setScale(0.8f);
 
     menu->addChild(btn);
     this->addChild(menu);

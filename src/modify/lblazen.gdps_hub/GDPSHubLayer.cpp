@@ -3,7 +3,7 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("lblazen.gdps_hub-GDPSHubLayer")
 class $nodeModify(MyGDPSHubLayer, GDPSHubLayer) {
     void modify() {
         if (Mod::get()->getSettingValue<bool>("lblazen.gdps_hub/GDPSHubLayer")) {

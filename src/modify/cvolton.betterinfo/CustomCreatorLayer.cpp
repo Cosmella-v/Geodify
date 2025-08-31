@@ -3,5 +3,5 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("cvolton.betterinfo-CustomCreatorLayer")
 SET_SWELVY(CustomCreatorLayer, "cvolton.betterinfo/CustomCreatorLayer", "cvolton.betterinfo/background");

@@ -3,7 +3,7 @@
 #include <Geode/modify/UIOptionsLayer.hpp>
 
 using namespace geode::prelude;
-
+ADD_TAG("gd-UIOptionsLayer")
 class $modify(MyUIOptionsLayer, UIOptionsLayer) {
 	bool init(bool p0) {
 		if (!UIOptionsLayer::init(p0)) {

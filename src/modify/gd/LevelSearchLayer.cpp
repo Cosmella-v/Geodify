@@ -3,7 +3,7 @@
 #include <Geode/modify/LevelSearchLayer.hpp>
 
 using namespace geode::prelude;
-
+ADD_TAG("gd-LevelSearchLayer")
 class $modify(MyLevelSearchLayer, LevelSearchLayer) {
 	bool init(int p0) {
 		if (!LevelSearchLayer::init(p0)) {

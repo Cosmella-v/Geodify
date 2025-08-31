@@ -3,7 +3,7 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("omgrod.garage_plus-StreamLayer")
 class $nodeModify(StreamLayer) {
     void modify() {
         if (Mod::get()->getSettingValue<bool>("omgrod.gdstream/StreamLayer")) {

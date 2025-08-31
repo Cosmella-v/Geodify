@@ -3,5 +3,5 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("minemaker0430.gddp_integration-DPListLayer")
 SET_SWELVY(DPListLayer, "minemaker0430.gddp_integration/DPListLayer", "bg");

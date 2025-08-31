@@ -7,6 +7,14 @@ if ("${CMAKE_SYSTEM_NAME}" STREQUAL "iOS" OR IOS)
 else()
     set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64")
 endif()
+
+find_package(Python3 COMPONENTS Interpreter REQUIRED)
+set(GENERATE_TAGS_SCRIPT ${CMAKE_SOURCE_DIR}/generate_tags.py)
+
+#execute_process(
+#    COMMAND ${Python3_EXECUTABLE} ${GENERATE_TAGS_SCRIPT}
+#)
+
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(Geodify VERSION 1.0.0)

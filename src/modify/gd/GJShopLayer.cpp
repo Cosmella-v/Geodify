@@ -5,6 +5,12 @@
 
 using namespace geode::prelude;
 
+ADD_TAG("gd-GJShopLayer-Normal")	
+ADD_TAG("gd-GJShopLayer-Secret")	
+ADD_TAG("gd-GJShopLayer-Community")	
+ADD_TAG("gd-GJShopLayer-Mechanic")	
+ADD_TAG("gd-GJShopLayer-Diamond")	
+
 class $modify(MyGJShopLayer, GJShopLayer) {
     bool init(ShopType p0) {
         if (!GJShopLayer::init(p0)) {

@@ -1,0 +1,287 @@
+{
+    "geode": "4.7.0",
+    "gd": {
+        "android": "2.2074",
+        "win": "2.2074",
+        "mac": "2.2074",
+        "ios": "2.2074"
+    },
+    "version": "v2.4.1",
+    "id": "omgrod.geodify",
+    "name": "Geodify",
+    "developers": ["OmgRod", "Cosmella-v"],
+    "description": "Converts most backgrounds to Geode's background (SwelvyBG).",
+    "early-load": true,
+    "resources": {
+        "sprites": [
+            "res/*.png",
+            "res/joke/*.png"
+        ]
+    },
+    "settings": {
+        "menu-loop": {
+            "name": "Menu Loop",
+            "description": "ninxout geode loop",
+            "type": "bool",
+            "default": true
+        },
+        "colour-title": {
+            "type": "title",
+            "name": "Color Offset Settings"
+        },
+        "color-enable": {
+            "name": "Enable Color Offset",
+            "description": "Enables color offset for the SwelvyBG.",
+            "type": "bool",
+            "default": false
+        },
+        "color-0": {
+            "name": "Color Offset - 1st",
+            "description": "The color offset of the background.",
+            "type": "color",
+            "default": "#F4D48E",
+            "enable-if": "color-enable"
+        },
+        "color-1": {
+            "name": "Color Offset - 2nd",
+            "description": "The color offset of the background.",
+            "type": "color",
+            "default": "#F5AE7D",
+            "enable-if": "color-enable"
+        },
+        "color-2": {
+            "name": "Color Offset - 3rd",
+            "description": "The color offset of the background.",
+            "type": "color",
+            "default": "#EC897C",
+            "enable-if": "color-enable"
+        },
+        "color-3": {
+            "name": "Color Offset - 4th",
+            "description": "The color offset of the background.",
+            "type": "color",
+            "default": "#D56985",
+            "enable-if": "color-enable"
+        },
+        "color-4": {
+            "name": "Color Offset - 5th",
+            "description": "The color offset of the background.",
+            "type": "color",
+            "default": "#AD5492",
+            "enable-if": "color-enable"
+        },
+        "color-5": {
+            "name": "Color Offset - 6th",
+            "description": "The color offset of the background.",
+            "type": "color",
+            "default": "#714A9A",
+            "enable-if": "color-enable"
+        },
+        "gd-title": {
+            "type": "title",
+            "name": "Geometry Dash"
+        },
+        "gd/MenuLayer": {
+            "name": "Main menu",
+            "description": "MenuLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/PlayLayer": {
+            "name": "Gameplay",
+            "description": "PlayLayer",
+            "type": "bool",
+            "default": false
+        },
+        "gd/LoadingLayer": {
+            "name": "Loading screen",
+            "description": "LoadingLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/LevelSelectLayer": {
+            "name": "Level select menu",
+            "description": "LevelSelectLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/CreatorLayer": {
+            "name": "Creator menu",
+            "description": "CreatorLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/LevelBrowserLayer": {
+            "name": "Level lists",
+            "description": "LevelBrowserLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/EditLevelLayer": {
+            "name": "Edit level menu",
+            "description": "EditLevelLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/LevelInfoLayer": {
+            "name": "Play level menu",
+            "description": "LevelInfoLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/GJGarageLayer": {
+            "name": "Icon select menu",
+            "description": "GJGarageLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/LevelSearchLayer": {
+            "name": "Search filters menu",
+            "description": "LevelSearchLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/LeaderboardsLayer": {
+            "name": "Leaderboards menu",
+            "description": "LeaderboardsLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/LevelListLayer": {
+            "name": "Level list menu",
+            "description": "LevelListLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/GauntletSelectLayer": {
+            "name": "Gauntlet select menu",
+            "description": "GauntletSelectLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/GauntletLayer": {
+            "name": "Gauntlet map menu",
+            "description": "GauntletLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/SecretRewardsLayer": {
+            "name": "Secret chests menu",
+            "description": "SecretRewardsLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/LevelAreaInnerLayer": {
+            "name": "Tower levels menu",
+            "description": "LevelAreaInnerLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/LevelAreaLayer": {
+            "name": "Tower menu",
+            "description": "LevelAreaLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/SecretLayer": {
+            "name": "Vault",
+            "description": "SecretLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/SecretLayer2": {
+            "name": "Vault of Secrets",
+            "description": "SecretLayer2",
+            "type": "bool",
+            "default": true
+        },
+        "gd/SecretLayer3": {
+            "name": "Basement",
+            "description": "SecretLayer3",
+            "type": "bool",
+            "default": true
+        },
+        "gd/SecretLayer4": {
+            "name": "Chamber of Time",
+            "description": "SecretLayer4",
+            "type": "bool",
+            "default": true
+        },
+        "gd/SecretLayer5": {
+            "name": "The Wraith",
+            "description": "SecretLayer5",
+            "type": "bool",
+            "default": true
+        },
+        "gd/GJShopLayer-Normal": {
+            "name": "Normal Shop",
+            "description": "GJShopLayer-Normal",
+            "type": "bool",
+            "default": true
+        },
+        "gd/GJShopLayer-Secret": {
+            "name": "Scratch Shop",
+            "description": "GJShopLayer-Secret",
+            "type": "bool",
+            "default": true
+        },
+        "gd/GJShopLayer-Community": {
+            "name": "Community Shop",
+            "description": "GJShopLayer-Community",
+            "type": "bool",
+            "default": true
+        },
+        "gd/GJShopLayer-Mechanic": {
+            "name": "Mechanic Shop",
+            "description": "GJShopLayer-Mechanic",
+            "type": "bool",
+            "default": true
+        },
+        "gd/GJShopLayer-Diamond": {
+            "name": "Diamond Shop",
+            "description": "GJShopLayer-Diamond",
+            "type": "bool",
+            "default": true
+        },
+        "gd/UIOptionsLayer": {
+            "name": "Platformer Controls Settings",
+            "description": "UIOptionsLayer",
+            "type": "bool",
+            "default": true
+        },
+        "gd/UIPOptionsLayer": {
+            "name": "Practice Controls Settings",
+            "description": "UIPOptionsLayer",
+            "type": "bool",
+            "default": true
+        },
+        "mods-title": {
+            "type": "title",
+            "name": "Mods Settings"
+        }
+    },
+    "dependencies": {
+        "geode.node-ids": ">=v1.19.0",
+        "alphalaneous.alphas_geode_utils": ">=1.0.3",
+        "alphalaneous.happy_textures": {
+            "importance": "recommended",
+            "version": ">=1.3.18"
+        }
+    },
+    "incompatibilities": {
+        "undefined0.icon_ninja": {
+            "importance": "breaking",
+            "version": "<=v1.2.3"
+        }
+    },
+    "tags": ["content", "customization", "enhancement", "interface", "offline", "universal"],
+    "links": {
+        "community": "https://discord.gg/vK3DuqJwyW",
+        "homepage": "https://omgrod.me",
+        "source": "https://github.com/OmgRod/Geodify"
+    },
+    "issues": {
+        "info": "Create an issue or create feature requests on the GitHub repository.",
+        "url": "https://github.com/OmgRod/Geodify/issues"
+    }
+}
