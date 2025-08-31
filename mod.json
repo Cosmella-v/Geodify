@@ -522,6 +522,16 @@
             "description": "TextureWorkshopLayer",
             "type": "bool",
             "default": false
+        },
+        "other-title": {
+            "type": "title",
+            "name": "Other"
+        },
+        "other/enable-menu-icons": {
+            "name": "Enable Menu Ground + Icons",
+            "description": "Keeps the ground and icons visible in MenuLayer.",
+            "type": "bool",
+            "default": false
         }
     },
     "dependencies": {

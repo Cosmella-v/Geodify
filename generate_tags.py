@@ -49,9 +49,22 @@ else:
 
 mod_data.setdefault("settings", {})
 
-for key, value in tag_settings.items():
-    if key not in mod_data["settings"]:
-        mod_data["settings"][key] = value
+new_settings = {}
+inserted = False
+for key, value in mod_data["settings"].items():
+    if key == "other-title" and not inserted:
+        for new_key, new_value in tag_settings.items():
+            if new_key not in mod_data["settings"]:
+                new_settings[new_key] = new_value
+        inserted = True
+    new_settings[key] = value
+
+if not inserted:
+    for new_key, new_value in tag_settings.items():
+        if new_key not in mod_data["settings"]:
+            new_settings[new_key] = new_value
+
+mod_data["settings"] = new_settings
 
 MOD_JSON_PATH_OUTPUT.write_text(json.dumps(mod_data, indent=4))
 
