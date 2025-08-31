@@ -111,7 +111,7 @@ This way is new from v2.0.0+!
 > You should only do this if the layer you are adding is for a new mod that isn't yet in Geodify.
 
 > [!NOTE]
-> As of writing this, the relevant code is a modData list
+> As of writing this, the relevant code is the modData list
 > e.g: { "Mod Name", "Devs", "ID" },
 
 
