@@ -82,6 +82,7 @@ bool GYModSettingsPopup::setup(std::string const& modName, std::string const& mo
             ->setAxisAlignment(AxisAlignment::End)
             ->setGap(0)
     );
+    scroll->m_contentLayer->updateLayout();
     scroll->moveToTop();
 
     auto menu = CCMenu::create();

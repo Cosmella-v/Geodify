@@ -9,6 +9,8 @@ A mod made to to change most menus' backgrounds to the Geode one
 To build this mod, follow one of the methods below:
 
 ### VS Code
+> [!NOTE]
+> Run the generate_tags.py to convert tags into settings if you add a new one :3
 
 1. Open the project in VS Code.
 2. Install the necessary dependencies (if not already done).
@@ -42,6 +44,10 @@ To add a custom background layer to a **Geometry Dash** menu, follow the example
 
 using namespace geode::prelude;
 
+// This way is the new way to register a layer tag from v2.4.1+!
+// ADD_TAG is gd-LayerNameThing
+ADD_TAG("gd-CreatorLayer")
+
 class $modify(MyCreatorLayer, CreatorLayer) {
 	bool init() {
 		if (!CreatorLayer::init()) {
@@ -74,6 +80,10 @@ For external mods that modify the background of a specific menu, you can use the
 
 using namespace geode::prelude;
 
+// This way is the new way to register a layer tag from v2.4.1+!
+// ADD_TAG is ModID-LayerNameThing
+ADD_TAG("dankmeme.globed2-GlobedLevelListLayer")
+
 SET_SWELVY(GlobedLevelListLayer /* Layer Name */, "dankmeme.globed2/GlobedLevelListLayer" /* Setting name - please keep in this format */, "background" /* Background Node ID */);
 ```
 
@@ -85,6 +95,9 @@ If the layer you're attempting to hook doesnt have an ID for its background, use
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
+// This way is the new way to register a layer tag from v2.4.1+!
+// ADD_TAG is ModID-LayerNameThing
+ADD_TAG("dankmeme.globed2-GlobedLevelListLayer")
 
 SET_SWELVY_SPRITE(GlobedLevelListLayer /* Layer Name */, "dankmeme.globed2/GlobedLevelListLayer" /* Setting name - please keep in this format */);
 ```
@@ -92,46 +105,13 @@ SET_SWELVY_SPRITE(GlobedLevelListLayer /* Layer Name */, "dankmeme.globed2/Globe
 This way is new from v2.0.0+!
 
 ### Registering Layers
-
-When adding a layer, it must also be registered. To do this, follow the steps below:
-
-1. Add it to `mod.json`
-
-```json
-{
-	"settings": {
-		"[Mod ID]/[Layer Name]": {
-            "name": "[Layer Name]",
-            "description": "[Layer Name]",
-            "type": "bool",
-            "default": true
-        },
-	}
-}
-```
-
-2. Add it to `src/Tags.hpp`
-
-```cpp
-m_tagMap = {
-    {"[Mod ID]-[Layer Name]", 0 /* Tag ID - should be unique */},
-}
-
-m_stringMap = {
-    {0 /* Tag ID - should be unique */, "[Mod ID]-[Layer Name]"},
-}
-```
-
-3. Add the mod to `src/layers/GYSettingSelectLayer.cpp`
+1. Add the mod to `src/Tags.hpp`
 
 > [!IMPORTANT]
 > You should only do this if the layer you are adding is for a new mod that isn't yet in Geodify.
 
 > [!NOTE]
-> As of writing this, the relevant code is located inside the `GYSettingSelectLayer::init()` function, where the `modTiles` variable is defined and populated before being added to the `contentLayer` within the scrollable UI section.
+> As of writing this, the relevant code is the modData list
+> e.g: { "Mod Name", "Devs", "ID" },
 
-```cpp
-auto modTiles = { 
-    GYModTile::create("[Mod Name]", "[Developer Name(s)]", "[Mod ID]"),
-}
-```
+

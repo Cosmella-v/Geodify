@@ -3,7 +3,7 @@
 #include <Geode/ui/General.hpp>
 
 using namespace geode::prelude;
-
+#include "Tags.hpp"
 #define SET_SWELVY(layer, setting, backgroundID)\
 class $nodeModify(my##layer, layer) {\
     void modify() {\

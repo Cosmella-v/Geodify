@@ -13,6 +13,7 @@
 #include "GYColorPopup.hpp"
 #include "GYModTile.hpp"
 #include "../SwelvyBG.hpp"
+#include "../Tags.hpp"
 
 /*
 
@@ -145,32 +146,8 @@ bool GYSettingSelectLayer::init() {
                 ->setGap(10.f);
     contentLayer->setLayout(columnLayout);
 
-    // Mods data
-    std::vector<std::tuple<std::string, std::string, std::string>> modData = {
-        { "Geometry Dash", "RobTop", "gd" },
-        { "Geode", "Geode Team", "geode.loader" },
-        { "BetterInfo", "Cvolton", "cvolton.betterinfo" },
-        { "Globed", "dankmeme", "dankmeme.globed2" },
-        { "Texture Loader", "Geode Team", "geode.texture-loader" },
-        { "Integrated Demonlist", "hiimjustin000", "hiimjustin000.integrated_demonlist" },
-        { "GDPS Switcher", "km7dev", "km7dev.gdps-switcher" },
-        { "BetterAchievements", "limegradient", "limegradient.betterachievements" },
-        { "GDDP Integration", "Minemaker0430", "minemaker0430.gddp_integration" },
-        { "Garage Plus", "OmgRod", "omgrod.garage_plus" },
-        { "GDStream", "OmgRod", "omgrod.gdstream" },
-        { "Geodify", "OmgRod & Cosmella-v", "omgrod.geodify" },
-        { "Newgrounds Explorer", "TheSillyDoggo", "thesillydoggo.newgrounds_explorer" },
-        { "Texture Workshop", "Uproxide", "uproxide.textures" },
-        { "Geometry Dash: Odyssey", "chumiu", "teamtcm.geometry-dash-odyssey" },
-        { "GDUtils", "Jouca & Firee", "gdutilsdevs.gdutils" },
-        { "GDPS Hub", "GDPS Hub Team + 2 more", "lblazen.gdps_hub" },
-        { "GDCP List Integration", "GDCP Team + 2 more", "gdcpteam.challenge-list" },
-        { "Random Tab", "Alphalaneous", "alphalaneous.random_tab" },
-        { "Geometry Dash: Surge", "OmgRod", "omgrod.geometry-dash-surge" },
-        { "SecretLayer6", "TimeStepYT", "timestepyt.secretlayer6" },
-    };
-
-    for (const auto& [name, author, id] : modData) {
+    
+    for (const auto& [name, author, id] : Tags::modData) {
         if (Loader::get()->isModLoaded(id) || id == "gd") {
             contentLayer->addChild(GYModTile::create(name, author, id));
         }

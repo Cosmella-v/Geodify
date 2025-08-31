@@ -3,5 +3,5 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("km7dev.gdps-switcher-ServerSwitchLayer")
 SET_SWELVY(ServerSwitchLayer, "km7dev.gdps-switcher/ServerSwitchLayer", "background");

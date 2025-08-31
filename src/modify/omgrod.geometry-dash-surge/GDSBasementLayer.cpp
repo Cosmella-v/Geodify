@@ -3,5 +3,5 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("omgrod.geometry-dash-surge-GDSBasementLayer")
 SET_SWELVY_SPRITE(GDSBasementLayer, "omgrod.geometry-dash-surge/GDSBasementLayer");

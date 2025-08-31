@@ -3,7 +3,7 @@
 #include <Geode/modify/LeaderboardsLayer.hpp>
 
 using namespace geode::prelude;
-
+ADD_TAG("gd-LeaderboardsLayer")	
 class $modify(MyLeaderboardsLayer, LeaderboardsLayer) {
 	bool init(LeaderboardState p0) {
 		if (!LeaderboardsLayer::init(p0)) {

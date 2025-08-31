@@ -3,7 +3,7 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("alphalaneous.random_tab-RandomLayer")
 class $nodeModify(MyRandomLayer, RandomLayer) {\
     void modify() {
         if (Mod::get()->getSettingValue<bool>("alphalaneous.random_tab/RandomLayer")) {

@@ -3,7 +3,7 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("omgrod.garage_plus-GPFeedbackLayer")
 class $nodeModify(GPFeedbackLayer) {
     void modify() {
         if (Mod::get()->getSettingValue<bool>("omgrod.garage_plus/GPFeedbackLayer")) {

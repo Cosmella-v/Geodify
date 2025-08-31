@@ -3,5 +3,5 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("hiimjustin000.integrated_demonlist-IDPackLayer")
 SET_SWELVY_SPRITE(IDPackLayer, "hiimjustin000.integrated_demonlist/IDPackLayer");

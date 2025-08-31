@@ -4,7 +4,7 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("geode.loader-ModsLayer")
 class $nodeModify(ModsLayer) {
     void modify() {
         if (Mod::get()->getSettingValue<bool>("geode.loader/ModsLayer")) {

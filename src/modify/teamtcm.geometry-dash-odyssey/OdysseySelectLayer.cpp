@@ -3,5 +3,5 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("teamtcm.geometry-dash-odyssey-OdysseySelectLayer")
 SET_SWELVY_SPRITE(OdysseySelectLayer, "teamtcm.geometry-dash-odyssey/OdysseySelectLayer");

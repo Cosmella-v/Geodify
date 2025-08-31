@@ -3,5 +3,5 @@
 #include <alphalaneous.alphas_geode_utils/include/NodeModding.h>
 
 using namespace geode::prelude;
-
+ADD_TAG("minemaker0430.gddp_integration-RouletteSafeLayer")
 SET_SWELVY(RouletteSafeLayer, "minemaker0430.gddp_integration/RouletteSafeLayer", "bg");
