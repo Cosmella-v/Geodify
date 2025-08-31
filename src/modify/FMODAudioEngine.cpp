@@ -1,9 +1,7 @@
 #include <Geode/Geode.hpp>
 using namespace geode::prelude;
 #include <Geode/modify/MenuLayer.hpp>
-/// @todo: Fix this code - on Windows its fine, but on Android it bugs out.
-/// I'm not going to work on this right now, but I'll leave it here for future reference. (@OmgRod)
-
+/// todo check on android32, ios and mac (@Cosmella-v)
 #include <Geode/Geode.hpp>
 #include <Geode/modify/FMODAudioEngine.hpp>
 using namespace geode::prelude;
