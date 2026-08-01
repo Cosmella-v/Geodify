@@ -34,20 +34,33 @@ bool GYScreenshotPopup::init(int const& layer) {
 
     m_sprite = LazySprite::create(spriteTargetSize);
     m_sprite->setAutoResize(true);
-    m_sprite->setLoadCallback([this, winSize](Result<> res) {
+    m_sprite->setLoadCallback([this, winSize, spriteTargetSize](Result<> res) {
         if (!res) {
             log::error("Failed to load image: {}", res.unwrapErr());
             onDownloadFail();
-            auto error = CCLabelBMFont::create(
-                "Failed to load the image.\nIf this isn't an issue with your Internet connection, please contact the developer.",
-                "bigFont.fnt",
-                winSize.width / 2,
-                CCTextAlignment::kCCTextAlignmentCenter
+
+            // fallback texture
+
+            auto sprite = LazySprite::create(spriteTargetSize);
+            sprite->setAutoResize(true);
+            sprite->loadFromFile(Mod::get()->getResourcesDir() / "noPreview.png");
+            sprite->setPosition(this->m_sprite->getPosition());
+            this->m_mainLayer->addChild(sprite);
+
+            // report bug
+
+            auto reportSpr = ButtonSprite::create("Report Bug");
+            reportSpr->setScale(0.75f);
+            auto reportBtn = CCMenuItemExt::createSpriteExtra(
+                reportSpr,
+                [this](CCObject* sender) {
+                    geode::utils::web::openLinkInBrowser("https://github.com/OmgRod/Geodify/issues/new?template=bug_report.md");
+                }
             );
-            error->setScale(0.5f);
-            error->setPosition(m_mainLayer->getContentSize() / 2);
-            m_mainLayer->addChild(error);
-            m_sprite->removeFromParent();
+            reportBtn->setPosition({ this->m_buttonMenu->getContentWidth() / 2, this->m_buttonMenu->getContentHeight() * 0.1f });
+            this->m_buttonMenu->addChild(reportBtn);
+
+            this->m_sprite->removeFromParent();
         }
     });
 
