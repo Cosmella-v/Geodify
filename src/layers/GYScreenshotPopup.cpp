@@ -34,10 +34,20 @@ bool GYScreenshotPopup::init(int const& layer) {
 
     m_sprite = LazySprite::create(spriteTargetSize);
     m_sprite->setAutoResize(true);
-    m_sprite->setLoadCallback([this](Result<> res) {
+    m_sprite->setLoadCallback([this, winSize](Result<> res) {
         if (!res) {
             log::error("Failed to load image: {}", res.unwrapErr());
             onDownloadFail();
+            auto error = CCLabelBMFont::create(
+                "Failed to load the image.\nIf this isn't an issue with your Internet connection, please contact the developer.",
+                "bigFont.fnt",
+                winSize.width / 2,
+                CCTextAlignment::kCCTextAlignmentCenter
+            );
+            error->setScale(0.5f);
+            error->setPosition(m_mainLayer->getContentSize() / 2);
+            m_mainLayer->addChild(error);
+            m_sprite->removeFromParent();
         }
     });
 

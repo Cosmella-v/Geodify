@@ -144,9 +144,9 @@ bool GYSettingSelectLayer::init() {
     contentLayer->setLayout(columnLayout);
 
     
-    for (const auto& [name, author, id] : Tags::modData) {
+    for (const auto& id : Tags::modData) {
         if (Loader::get()->isModLoaded(id) || id == "gd") {
-            contentLayer->addChild(GYModTile::create(name, author, id));
+            contentLayer->addChild(GYModTile::create(id));
         }
     }
 

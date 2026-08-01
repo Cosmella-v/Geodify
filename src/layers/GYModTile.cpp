@@ -12,26 +12,31 @@ void GYModTile::viewMod(CCObject* sender) {
     GYModSettingsPopup::create(this->m_modName, this->m_modAuthor, this->m_modID)->show();
 }
 
-GYModTile* GYModTile::create(std::string modName, std::string modAuthor, std::string modID) {
+GYModTile* GYModTile::create(std::string modID) {
     GYModTile* ret = new GYModTile();
-    if (ret && ret->init(modName, modAuthor, modID)) {
+    if (ret && ret->init(modID)) {
         ret->autorelease();
         return ret;
     }
     delete ret;
     return nullptr;
 }
-bool GYModTile::init(std::string modName, std::string modAuthor, std::string modID) {
+bool GYModTile::init(std::string modID) {
     if (!CCLayer::init())
         return false;
     
     geode::Mod* mod = nullptr;
-    if (modID != "gd") {
+    if (modID == "gd") {
+        this->m_modID = "gd";
+        this->m_modName = "Geometry Dash";
+        this->m_modAuthor = "RobTop";
+    } else {
         mod = Loader::get()->getLoadedMod(modID);
+        this->m_modID = mod ? std::string(mod->getID()) : modID;
+        this->m_modName = mod ? std::string(mod->getName()) : "Unknown Mod";
+        this->m_modAuthor = mod ? ModMetadata::formatDeveloperDisplayString(mod->getDevelopers()) : "Unknown";
     }
-    this->m_modID = mod ? std::string(mod->getID()) : modID;
-    this->m_modName = mod ? std::string(mod->getName()) : modName;
-    this->m_modAuthor = mod ? ModMetadata::formatDeveloperDisplayString(mod->getDevelopers()) : modAuthor;
+
     setMouseEnabled(true);
 
     auto winSize = CCDirector::sharedDirector()->getWinSize();
@@ -44,14 +49,14 @@ bool GYModTile::init(std::string modName, std::string modAuthor, std::string mod
     bg->setAnchorPoint({ 0.f, 0.f});
     this->addChild(bg);
 
-    auto modNameText = CCLabelBMFont::create(modName.c_str(), "bigFont.fnt");
+    auto modNameText = CCLabelBMFont::create(m_modName.c_str(), "bigFont.fnt");
     modNameText->setPosition({ this->getContentSize().width / 2, this->getContentSize().height - winSize.height * 0.05f });
     float maxWidth = this->getContentSize().width * 0.8f;
     float scale = (modNameText->getContentSize().width > maxWidth) ? (this->getContentSize().width * 0.7f) / modNameText->getContentSize().width : 0.5f;
     modNameText->setScale(std::min(scale, 0.5f));
     bg->addChild(modNameText);
 
-    auto modAuthorText = CCLabelBMFont::create(fmt::format("By {}", modAuthor).c_str(), "goldFont.fnt");
+    auto modAuthorText = CCLabelBMFont::create(fmt::format("By {}", m_modAuthor).c_str(), "goldFont.fnt");
     modAuthorText->setPosition({ this->getContentSize().width / 2, this->getContentSize().height - winSize.height * 0.35f });
     scale = (modAuthorText->getContentSize().width > maxWidth) ? (this->getContentSize().width * 0.7f) / modAuthorText->getContentSize().width : 0.5f;
     modAuthorText->setScale(std::min(scale, 0.5f));

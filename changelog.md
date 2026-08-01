@@ -1,8 +1,14 @@
 # Geodify Changelog
 
-## v2.6.1
+## v3.0.0
 
-- Fixed broken loading background when Sapphire SDK background is enabled
+- Added `GD World Tournament` mod
+- Added `Level Grind` mod
+- Added `That Darn Coin` mod (Colon's secret coin mod)
+- Reworked the mod identification system
+- Added Sapphire background previews
+- Made settings button take you straight to overhauled settings menu
+- Fixed broken loading background when Sapphire SDK background is enabled (sorry the fix took too long to finish)
 
 ## v2.6.0
 

@@ -44,6 +44,7 @@ bool SwelvyBG::init(float widthmult, float hightmult, float minspeed, float maxs
     CCSprite* sapphireBg = nullptr;
 
     if (useSapphireBackground) {
+        CCTextureCache::sharedTextureCache()->addImage("sapphire-bg.png"_spr, false); // neither true/false dont work
         sapphireBg = CCSprite::create("sapphire-bg.png"_spr);
         if (!sapphireBg) {
             log::warn("Failed to load sapphire-bg.png. Using default background.");
