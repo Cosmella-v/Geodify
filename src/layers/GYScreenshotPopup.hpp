@@ -34,6 +34,7 @@ protected:
     void createToggleButtons();
     void removeToggleButtons();
     void fixSpriteSize();
+    void createReportButton();
 
 public:
     static GYScreenshotPopup* create(int const& text);

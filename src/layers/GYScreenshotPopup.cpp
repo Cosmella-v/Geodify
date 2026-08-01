@@ -130,14 +130,14 @@ void GYScreenshotPopup::reloadPreview() {
             fixSpriteSize();
 
             createToggleButtons();
-        }
-        else {
+        } else {
             log::error(
                 "Failed to load preview: {}",
                 res.unwrapErr()
             );
 
             removeToggleButtons();
+            createReportButton();
             onDownloadFail();
         }
     });
@@ -153,11 +153,19 @@ void GYScreenshotPopup::reloadPreview() {
 void GYScreenshotPopup::onDownloadFail() {
     if (!m_sprite) return;
 
+    m_sprite->removeFromParentAndCleanup(true);
+
+    m_sprite = LazySprite::create(m_spriteTargetSize);
+    m_sprite->setAutoResize(true);
+
+    m_mainLayer->addChildAtPosition(
+        m_sprite,
+        Anchor::Center
+    );
+
     m_sprite->loadFromFile(
         Mod::get()->getResourcesDir() / "noPreview.png"
     );
-
-    m_sprite->setScale(1.0f);
 
     fixSpriteSize();
 }
@@ -231,12 +239,12 @@ void GYScreenshotPopup::createToggleButtons() {
 
 void GYScreenshotPopup::removeToggleButtons() {
     if (m_swelvyBtn) {
-        m_swelvyBtn->removeFromParent();
+        m_swelvyBtn->removeFromParentAndCleanup(true);
         m_swelvyBtn = nullptr;
     }
 
     if (m_sapphireBtn) {
-        m_sapphireBtn->removeFromParent();
+        m_sapphireBtn->removeFromParentAndCleanup(true);
         m_sapphireBtn = nullptr;
     }
 }
@@ -252,4 +260,25 @@ void GYScreenshotPopup::fixSpriteSize() {
     float scaleY = m_spriteTargetSize.height / size.height;
 
     m_sprite->setScale(std::min(scaleX, scaleY));
+}
+
+void GYScreenshotPopup::createReportButton() {
+    auto reportSpr = ButtonSprite::create("Report Bug");
+    reportSpr->setScale(0.75f);
+
+    auto reportBtn = CCMenuItemExt::createSpriteExtra(
+        reportSpr,
+        [](CCObject*) {
+            geode::utils::web::openLinkInBrowser(
+                "https://github.com/OmgRod/Geodify/issues/new?template=bug_report.md"
+            );
+        }
+    );
+
+    reportBtn->setPosition({
+        m_buttonMenu->getContentWidth() / 2,
+        m_buttonMenu->getContentHeight() * 0.1f
+    });
+
+    m_buttonMenu->addChild(reportBtn);
 }

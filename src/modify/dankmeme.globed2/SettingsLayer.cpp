@@ -4,4 +4,4 @@
 
 using namespace geode::prelude;
 ADD_TAG("dankmeme.globed2-SettingsLayer");
-SET_SWELVY_WITH_NAMESPACE(globed, GlobedSettingsLayer, "dankmeme.globed2/SettingsLayer", "background");
+SET_SWELVY_WITH_NAMESPACE(globed, SettingsLayer, "dankmeme.globed2/SettingsLayer", "background");

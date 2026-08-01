@@ -5,10 +5,17 @@
 - Added `GD World Tournament` mod
 - Added `Level Grind` mod
 - Added `That Darn Coin` mod (Colon's secret coin mod)
+- Added `Rated Layouts` mod
+- Removed outdated mods:
+  - Newgrounds Explorer
+  - Garage Plus
+  - GDStream
+  - Geometry Dash: Surge
+  - BetterAchievements
 - Reworked the mod identification system
 - Added Sapphire background previews
-- Made settings button take you straight to overhauled settings menu
 - Fixed broken loading background when Sapphire SDK background is enabled (sorry the fix took too long to finish)
+- Fixed Globed's `SettingsLayer`
 
 ## v2.6.0
 

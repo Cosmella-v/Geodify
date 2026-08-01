@@ -27,6 +27,10 @@
                 "open": "Open Better Settings Menu"
             }
         },
+        "warning": {
+            "name": "DO NOT USE THIS SETTINGS MENU FOR YOUR OWN SAKE. PLEASE USE THE \"BETTER SETTINGS MENU\" ABOVE!",
+            "type": "title"
+        },
         "background-type": {
             "name": "Background Type",
             "type": "string",
