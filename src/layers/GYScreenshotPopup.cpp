@@ -14,6 +14,8 @@ bool GYScreenshotPopup::init(int const& layer) {
         return false;
     }
 
+    m_layerName = layerName;
+
     std::string result = extractLastSegment(layerName);
 
     if (!m_mainLayer) {
@@ -22,72 +24,157 @@ bool GYScreenshotPopup::init(int const& layer) {
     }
 
     this->setTitle(result);
-    m_mainLayer->setContentSize({ winSize.width * 0.6f, winSize.height * 0.7f });
-    m_mainLayer->updateLayout();
 
-    std::string URL = fmt::format("https://raw.githubusercontent.com/OmgRod/Geodify/master/previews/{}Preview.png", layerName);
+    m_mainLayer->setContentSize({
+        winSize.width * 0.6f,
+        winSize.height * 0.7f
+    });
+
+    m_mainLayer->updateLayout();
 
     CCSize spriteTargetSize{
         m_mainLayer->getContentSize().width * 0.75f,
         m_mainLayer->getContentSize().height * 0.75f
     };
 
+    m_spriteTargetSize = spriteTargetSize;
+
     m_sprite = LazySprite::create(spriteTargetSize);
     m_sprite->setAutoResize(true);
-    m_sprite->setLoadCallback([this, winSize, spriteTargetSize](Result<> res) {
-        if (!res) {
-            log::error("Failed to load image: {}", res.unwrapErr());
-            onDownloadFail();
 
-            // fallback texture
+    m_sprite->setLoadCallback([this, spriteTargetSize](Result<> res) {
+        if (res) {
+            log::info("Preview loaded successfully");
+            createToggleButtons();
+        } else {
+            log::error(
+                "Failed to load preview: {}",
+                res.unwrapErr()
+            );
+
+            removeToggleButtons();
+            onDownloadFail();
 
             auto sprite = LazySprite::create(spriteTargetSize);
             sprite->setAutoResize(true);
-            sprite->loadFromFile(Mod::get()->getResourcesDir() / "noPreview.png");
+            sprite->loadFromFile(
+                Mod::get()->getResourcesDir() / "noPreview.png"
+            );
+
             sprite->setPosition(this->m_sprite->getPosition());
             this->m_mainLayer->addChild(sprite);
 
-            // report bug
-
             auto reportSpr = ButtonSprite::create("Report Bug");
             reportSpr->setScale(0.75f);
+
             auto reportBtn = CCMenuItemExt::createSpriteExtra(
                 reportSpr,
-                [this](CCObject* sender) {
+                [](CCObject*) {
                     geode::utils::web::openLinkInBrowser("https://github.com/OmgRod/Geodify/issues/new?template=bug_report.md");
                 }
             );
-            reportBtn->setPosition({ this->m_buttonMenu->getContentWidth() / 2, this->m_buttonMenu->getContentHeight() * 0.1f });
+
+            reportBtn->setPosition({
+                this->m_buttonMenu->getContentWidth() / 2,
+                this->m_buttonMenu->getContentHeight() * 0.1f
+            });
+            
             this->m_buttonMenu->addChild(reportBtn);
 
-            this->m_sprite->removeFromParent();
+            m_sprite->removeFromParentAndCleanup(true);
+            m_sprite = nullptr;
         }
     });
 
-    m_sprite->loadFromUrl(URL);
-    m_mainLayer->addChildAtPosition(m_sprite, Anchor::Center);
+    m_mainLayer->addChildAtPosition(
+        m_sprite,
+        Anchor::Center
+    );
+
+    reloadPreview();
 
     return true;
+}
+
+std::string GYScreenshotPopup::getPreviewURL() {
+    if (m_previewType == PreviewType::Sapphire) {
+        return fmt::format(
+            "https://raw.githubusercontent.com/OmgRod/Geodify/master/previews/sapphire/{}Preview.png",
+            m_layerName
+        );
+    }
+
+    return fmt::format(
+        "https://raw.githubusercontent.com/OmgRod/Geodify/master/previews/{}Preview.png",
+        m_layerName
+    );
+}
+
+void GYScreenshotPopup::reloadPreview() {
+    auto url = getPreviewURL();
+
+    log::info("Loading preview: {}", url);
+
+    if (m_sprite) {
+        m_sprite->removeFromParentAndCleanup(true);
+        m_sprite = nullptr;
+    }
+
+    m_sprite = LazySprite::create(m_spriteTargetSize);
+    m_sprite->setAutoResize(true);
+
+    m_sprite->setLoadCallback([this](Result<> res) {
+        if (res) {
+            log::info("Preview loaded successfully");
+
+            fixSpriteSize();
+
+            createToggleButtons();
+        }
+        else {
+            log::error(
+                "Failed to load preview: {}",
+                res.unwrapErr()
+            );
+
+            removeToggleButtons();
+            onDownloadFail();
+        }
+    });
+
+    m_mainLayer->addChildAtPosition(
+        m_sprite,
+        Anchor::Center
+    );
+
+    m_sprite->loadFromUrl(url);
 }
 
 void GYScreenshotPopup::onDownloadFail() {
     if (!m_sprite) return;
 
-    m_sprite->initWithSpriteFrameName("noPreview.png"_spr);
+    m_sprite->loadFromFile(
+        Mod::get()->getResourcesDir() / "noPreview.png"
+    );
+
     m_sprite->setScale(1.0f);
+
+    fixSpriteSize();
 }
 
 std::string GYScreenshotPopup::extractLastSegment(const std::string& input) {
     size_t lastDash = input.rfind('-');
+
     if (lastDash != std::string::npos) {
         return input.substr(lastDash + 1);
     }
+
     return input;
 }
 
 GYScreenshotPopup* GYScreenshotPopup::create(int const& text) {
     auto ret = new GYScreenshotPopup();
-    auto winSize = CCDirector::sharedDirector()->getWinSize();
+
     if (ret->init(text)) {
         ret->autorelease();
         return ret;
@@ -95,4 +182,74 @@ GYScreenshotPopup* GYScreenshotPopup::create(int const& text) {
 
     delete ret;
     return nullptr;
+}
+
+void GYScreenshotPopup::createToggleButtons() {
+    if (m_swelvyBtn || m_sapphireBtn)
+        return;
+
+    auto swelvySpr = ButtonSprite::create("SwelvyBG");
+    swelvySpr->setScale(0.65f);
+
+    m_swelvyBtn = CCMenuItemExt::createSpriteExtra(
+        swelvySpr,
+        [this](CCObject*) {
+            m_previewType = PreviewType::SwelvyBG;
+            reloadPreview();
+        }
+    );
+
+
+    auto sapphireSpr = ButtonSprite::create("Sapphire");
+    sapphireSpr->setScale(0.65f);
+
+    m_sapphireBtn = CCMenuItemExt::createSpriteExtra(
+        sapphireSpr,
+        [this](CCObject*) {
+            m_previewType = PreviewType::Sapphire;
+            reloadPreview();
+        }
+    );
+
+
+    m_swelvyBtn->setPosition({
+        m_buttonMenu->getContentWidth() * 0.3f,
+        m_buttonMenu->getContentHeight() * 0.1f
+    });
+
+
+    m_sapphireBtn->setPosition({
+        m_buttonMenu->getContentWidth() * 0.7f,
+        m_buttonMenu->getContentHeight() * 0.1f
+    });
+
+
+    m_buttonMenu->addChild(m_swelvyBtn);
+    m_buttonMenu->addChild(m_sapphireBtn);
+}
+
+
+void GYScreenshotPopup::removeToggleButtons() {
+    if (m_swelvyBtn) {
+        m_swelvyBtn->removeFromParent();
+        m_swelvyBtn = nullptr;
+    }
+
+    if (m_sapphireBtn) {
+        m_sapphireBtn->removeFromParent();
+        m_sapphireBtn = nullptr;
+    }
+}
+
+void GYScreenshotPopup::fixSpriteSize() {
+    if (!m_sprite) return;
+
+    auto size = m_sprite->getContentSize();
+
+    if (size.width == 0 || size.height == 0) return;
+
+    float scaleX = m_spriteTargetSize.width / size.width;
+    float scaleY = m_spriteTargetSize.height / size.height;
+
+    m_sprite->setScale(std::min(scaleX, scaleY));
 }
