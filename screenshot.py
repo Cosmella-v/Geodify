@@ -2,7 +2,7 @@ import os
 from tkinter import Tk, filedialog
 from PIL import Image
 
-MOD_ID = "delivel.level-grind"
+MOD_ID = "omgrod.geodify"
 
 def select_image(title):
     path = filedialog.askopenfilename(

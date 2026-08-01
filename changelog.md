@@ -16,6 +16,9 @@
 - Added Sapphire background previews
 - Fixed broken loading background when Sapphire SDK background is enabled (sorry the fix took too long to finish)
 - Fixed Globed's `SettingsLayer`
+- Added "Disabled" background type (to disable the mod)
+- Compacted most of the mod to one file
+- Added Geodify menu loop to the better settings menu
 
 ## v2.6.0
 

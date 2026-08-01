@@ -27,19 +27,27 @@
                 "open": "Open Better Settings Menu"
             }
         },
-        "warning": {
-            "name": "DO NOT USE THIS SETTINGS MENU FOR YOUR OWN SAKE. PLEASE USE THE \"BETTER SETTINGS MENU\" ABOVE!",
-            "type": "title"
-        },
         "background-type": {
             "name": "Background Type",
             "type": "string",
-            "one-of": ["Default", "Sapphire"],
+            "one-of": ["Default", "Sapphire", "Disabled"],
             "default": "Default"
+        },
+        "warning1": {
+            "type": "info",
+            "description": "DO NOT USE THIS GEODE SETTINGS MENU FOR YOUR OWN SAKE. PLEASE USE THE \"BETTER SETTINGS MENU\" ABOVE!"
+        },
+        "warning2": {
+            "type": "info",
+            "description": "IF YOU DECIDE TO SCROLL DOWN, YOU ARE MAKING A HUGE MISTAKE!"
+        },
+        "warning3": {
+            "type": "info",
+            "description": "EVEN IF YOU USE THE SEARCH BAR, SEARCHING FOR SPECIFIC MENUS IS GONNA BE VERY ANNOYING!"
         },
         "menu-loop": {
             "name": "Menu Loop",
-            "description": "ninxout geode loop",
+            "description": "ninXout's Geode loop",
             "type": "bool",
             "default": false
         },

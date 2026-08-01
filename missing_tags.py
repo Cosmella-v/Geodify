@@ -41,6 +41,18 @@ def get_preview_tags(directory):
 
     return tags
 
+def get_misformatted_files(directory):
+    files = []
+
+    if not directory.exists():
+        return files
+
+    for file in directory.glob("*.png"):
+        if not file.stem.endswith("Preview"):
+            files.append(file.name)
+
+    return files
+
 def main():
     source_tags = get_source_tags()
 
@@ -49,6 +61,9 @@ def main():
 
     missing_swelvy = source_tags - swelvy_tags
     missing_sapphire = source_tags - sapphire_tags
+
+    bad_swelvy = get_misformatted_files(PREVIEWS_DIR)
+    bad_sapphire = get_misformatted_files(SAPPHIRE_DIR)
 
     print("\n=== Missing SwelvyBG previews ===")
 
@@ -66,12 +81,30 @@ def main():
     else:
         print("None")
 
+    print("\n=== Misformatted SwelvyBG filenames ===")
+
+    if bad_swelvy:
+        for file in sorted(bad_swelvy):
+            print(file)
+    else:
+        print("None")
+
+    print("\n=== Misformatted Sapphire filenames ===")
+
+    if bad_sapphire:
+        for file in sorted(bad_sapphire):
+            print(file)
+    else:
+        print("None")
+
     print("\n=== Preview summary ===")
-    print(f"Source tags:   {len(source_tags)}")
-    print(f"SwelvyBG:      {len(swelvy_tags)}")
-    print(f"Sapphire:      {len(sapphire_tags)}")
-    print(f"Missing BG:    {len(missing_swelvy)}")
-    print(f"Missing SAP:   {len(missing_sapphire)}")
+    print(f"Source tags:          {len(source_tags)}")
+    print(f"SwelvyBG:             {len(swelvy_tags)}")
+    print(f"Sapphire:             {len(sapphire_tags)}")
+    print(f"Missing BG:           {len(missing_swelvy)}")
+    print(f"Missing SAP:          {len(missing_sapphire)}")
+    print(f"Bad BG filenames:     {len(bad_swelvy)}")
+    print(f"Bad SAP filenames:    {len(bad_sapphire)}")
 
 if __name__ == "__main__":
     main()

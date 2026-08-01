@@ -8,12 +8,14 @@ using namespace geode::prelude;
 #define SET_SWELVY(layer, setting, backgroundID)\
 class $nodeModify(my##layer, layer) {\
     void modify() {\
-        if (Mod::get()->getSettingValue<bool>(setting)) {\
-            if (auto bg = this->getChildByID(backgroundID)) {\
-                bg->setVisible(false);\
-                SwelvyBG* swelvyBG = SwelvyBG::create();\
-                swelvyBG->setZOrder(-999);\
-                this->addChild(swelvyBG);\
+        if (Mod::get()->getSettingValue<std::string>("background-type") != "Disabled") {\
+            if (Mod::get()->getSettingValue<bool>(setting)) {\
+                if (auto bg = this->getChildByID(backgroundID)) {\
+                    bg->setVisible(false);\
+                    SwelvyBG* swelvyBG = SwelvyBG::create();\
+                    swelvyBG->setZOrder(-999);\
+                    this->addChild(swelvyBG);\
+                }\
             }\
         }\
     }\
@@ -22,42 +24,48 @@ class $nodeModify(my##layer, layer) {\
 #define SET_SWELVY_SPRITE(layer, setting)\
 class $nodeModify(my##layer, layer) {\
     void modify() {\
-        if (Mod::get()->getSettingValue<bool>(setting)) {\
-            if (auto bg = this->template getChildByType<CCSprite>(0)) {\
-                bg->setVisible(false);\
-                SwelvyBG* swelvyBG = SwelvyBG::create();\
-                swelvyBG->setZOrder(-999);\
-                this->addChild(swelvyBG);\
+        if (Mod::get()->getSettingValue<std::string>("background-type") != "Disabled") {\
+            if (Mod::get()->getSettingValue<bool>(setting)) {\
+                if (auto bg = this->template getChildByType<CCSprite>(0)) {\
+                    bg->setVisible(false);\
+                    SwelvyBG* swelvyBG = SwelvyBG::create();\
+                    swelvyBG->setZOrder(-999);\
+                    this->addChild(swelvyBG);\
+                }\
             }\
         }\
     }\
 }
 
 #define SET_SWELVY_WITH_NAMESPACE(namespace, layer, setting, backgroundID) \
-class $nodeModify(my##layer, namespace::layer) { \
+class $nodeModify(my##namespace##layer, namespace::layer) { \
     void modify() { \
-        if (Mod::get()->getSettingValue<bool>(setting)) { \
-            if (auto bg = this->getChildByID(backgroundID)) { \
-                bg->setVisible(false); \
-                SwelvyBG* swelvyBG = SwelvyBG::create(); \
-                swelvyBG->setZOrder(-999); \
-                this->addChild(swelvyBG); \
+        if (Mod::get()->getSettingValue<std::string>("background-type") != "Disabled") {\
+            if (Mod::get()->getSettingValue<bool>(setting)) { \
+                if (auto bg = this->getChildByID(backgroundID)) { \
+                    bg->setVisible(false); \
+                    SwelvyBG* swelvyBG = SwelvyBG::create(); \
+                    swelvyBG->setZOrder(-999); \
+                    this->addChild(swelvyBG); \
+                } \
             } \
-        } \
+        }\
     } \
 }
 
 #define SET_SWELVY_SPRITE_WITH_NAMESPACE(namespace, layer, setting) \
-class $nodeModify(my##layer, namespace::layer) { \
+class $nodeModify(my##namespace##layer, namespace::layer) { \
     void modify() { \
-        if (Mod::get()->getSettingValue<bool>(setting)) { \
-            if (auto bg = this->template getChildByType<CCSprite>(0)) { \
-                bg->setVisible(false); \
-                SwelvyBG* swelvyBG = SwelvyBG::create(); \
-                swelvyBG->setZOrder(-999); \
-                this->addChild(swelvyBG); \
+        if (Mod::get()->getSettingValue<std::string>("background-type") != "Disabled") {\
+            if (Mod::get()->getSettingValue<bool>(setting)) { \
+                if (auto bg = this->template getChildByType<CCSprite>(0)) { \
+                    bg->setVisible(false); \
+                    SwelvyBG* swelvyBG = SwelvyBG::create(); \
+                    swelvyBG->setZOrder(-999); \
+                    this->addChild(swelvyBG); \
+                } \
             } \
-        } \
+        }\
     } \
 }
 
