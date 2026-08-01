@@ -705,16 +705,18 @@ ADD_TAG("geode.loader-ModsLayer");
 class $nodeModify(ModsLayer) {
     void modify() {
         if (Mod::get()->getSettingValue<std::string>("background-type") != "Disabled") {
-            if (Mod::get()->getSettingValue<bool>("geode.loader/ModsLayer")) {
-                if (!(Loader::get()->getLoadedMod("geode.loader")->getSettingValue<bool>("enable-geode-theme"))) {
-                    if (auto bg = getChildByID("bg")) {
-                        bg->setVisible(false);
-                    }
+            if (Mod::get()->getSettingValue<std::string>("background-type") != "Disabled") {
+                if (Mod::get()->getSettingValue<bool>("geode.loader/ModsLayer")) {
+                    if (!(Loader::get()->getLoadedMod("geode.loader")->getSettingValue<bool>("enable-geode-theme"))) {
+                        if (auto bg = getChildByID("bg")) {
+                            bg->setVisible(false);
+                        }
 
-                    SwelvyBG* swelvyBG = SwelvyBG::create();
-                    swelvyBG->setZOrder(-1);
-                    
-                    addChild(swelvyBG);
+                        SwelvyBG* swelvyBG = SwelvyBG::create();
+                        swelvyBG->setZOrder(-1);
+                        
+                        addChild(swelvyBG);
+                    }
                 }
             }
         }
@@ -742,7 +744,27 @@ ADD_TAG("arcticwoof.rated_layouts-RLSpireLayer");
 SET_SWELVY_SPRITE(RLSpireLayer, "arcticwoof.rated_layouts/RLSpireLayer");
 
 ADD_TAG("arcticwoof.rated_layouts-RLSearchLayer");
-SET_SWELVY_SPRITE(RLSearchLayer, "arcticwoof.rated_layouts/RLSearchLayer");
+class $nodeModify(RLSearchLayer) {
+    void modify() {
+        if (Mod::get()->getSettingValue<std::string>("background-type") != "Disabled") {
+            if (Mod::get()->getSettingValue<std::string>("background-type") != "Disabled") {
+                if (Mod::get()->getSettingValue<bool>("arcticwoof.rated_layouts/RLSearchLayer")) {
+                    for (auto* child : CCArrayExt<CCNode*>(getChildren())) {
+                        if (std::string(typeid(*child).name()).find("RepeatingBackground") != std::string::npos) {
+                            child->setVisible(false);
+                            break;
+                        }
+                    }
+
+                    SwelvyBG* swelvyBG = SwelvyBG::create();
+                    swelvyBG->setZOrder(-10);
+                    
+                    addChild(swelvyBG);
+                }
+            }
+        }
+    }
+};
 
 ADD_TAG("arcticwoof.rated_layouts-RLShopLayer");
 SET_SWELVY_SPRITE(RLShopLayer, "arcticwoof.rated_layouts/RLShopLayer");

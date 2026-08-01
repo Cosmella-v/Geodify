@@ -2,7 +2,7 @@ import os
 from tkinter import Tk, filedialog
 from PIL import Image
 
-MOD_ID = "omgrod.geodify"
+MOD_ID = "arcticwoof.rated_layouts"
 
 def select_image(title):
     path = filedialog.askopenfilename(

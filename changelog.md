@@ -1,5 +1,9 @@
 # Geodify Changelog
 
+## v3.0.1
+
+- Fixed Rated Layouts' `RLSearchLayer`
+
 ## v3.0.0
 
 - Added `GD World Tournament` mod
@@ -61,8 +65,6 @@
 
 - Changed all default modded layer settings to false
 - Switched to `LazySprite`
-
-> ok ery, you win...
 
 ## v2.2.0
 
