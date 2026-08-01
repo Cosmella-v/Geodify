@@ -19,6 +19,7 @@
 - Added "Disabled" background type (to disable the mod)
 - Compacted most of the mod to one file
 - Added Geodify menu loop to the better settings menu
+- Added "Report Bug" button to layer previews
 
 ## v2.6.0
 
