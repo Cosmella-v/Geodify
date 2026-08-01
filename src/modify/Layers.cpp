@@ -747,6 +747,12 @@ SET_SWELVY_SPRITE(RLSearchLayer, "arcticwoof.rated_layouts/RLSearchLayer");
 ADD_TAG("arcticwoof.rated_layouts-RLShopLayer");
 SET_SWELVY_SPRITE(RLShopLayer, "arcticwoof.rated_layouts/RLShopLayer");
 
+ADD_TAG("arcticwoof.rated_layouts-RLSecretLayer1");
+SET_SWELVY_SPRITE(RLSecretLayer1, "arcticwoof.rated_layouts/RLSecretLayer1");
+
+ADD_TAG("arcticwoof.rated_layouts-RLSpireSelectLevelLayer");
+SET_SWELVY_SPRITE(RLSpireSelectLevelLayer, "arcticwoof.rated_layouts/RLSpireSelectLevelLayer");
+
 // cvolton.betterinfo
 
 ADD_TAG("cvolton.betterinfo-CustomCreatorLayer");

@@ -13,6 +13,7 @@ public:
     static const inline std::vector<std::string> modData = {
         "gd",
         "geode.loader",
+        "arcticwoof.rated_layouts",
         "cvolton.betterinfo",
         "dankmeme.globed2",
         "geode.texture-loader",
