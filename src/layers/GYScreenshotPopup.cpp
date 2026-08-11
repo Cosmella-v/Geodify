@@ -270,7 +270,7 @@ void GYScreenshotPopup::createReportButton() {
         reportSpr,
         [](CCObject*) {
             geode::utils::web::openLinkInBrowser(
-                "https://github.com/OmgRod/Geodify/issues/new?template=bug_report.md"
+                "https://github.com/Cosmella-v/Geodify/issues/new?template=bug_report.md"
             );
         }
     );
