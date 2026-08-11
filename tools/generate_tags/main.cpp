@@ -1,16 +1,19 @@
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <regex>
-#include <string>
 #include <macros.hpp>
 #include <nlohmann/json.hpp>
+#include <regex>
+#include <string>
+
 
 namespace fs = std::filesystem;
-using json = nlohmann::json;
+using json = nlohmann::ordered_json;
+
 
 #define MERGE_JSON "geodeify.json"
 #define OUTPUT_JSON "mod.json"
+
 
 std::string replaceUnderscores(std::string value) {
     for (char& character : value) {
@@ -22,24 +25,23 @@ std::string replaceUnderscores(std::string value) {
     return value;
 }
 
+
 int main() {
     try {
         std::cout << "Creating mod.json for geode!\n";
 
-        const std::regex commentPattern(
-            R"(//\[\[omgrod\.geodify/TAG\]\]\s*([^\s:]+))"
-        );
-
-        const std::regex macroPattern(
-            "ADD_TAG\\s*\\(\\s*\"([^\"]*)\"\\s*\\)"
-        );
-
         json tagSettings = json::object();
 
+
         if (!fs::exists(SOURCE_DIRECTORY)) {
-            std::cerr<< "Error: Mod's code folder doesn't exist?"<< SOURCE_DIRECTORY<< '\n';
+            std::cerr
+                << "Error: Mod's code folder doesn't exist? "
+                << SOURCE_DIRECTORY
+                << '\n';
+
             return 1;
         }
+
 
         for (const auto& entry :
              fs::recursive_directory_iterator(SOURCE_DIRECTORY)) {
@@ -52,21 +54,32 @@ int main() {
                 continue;
             }
 
+
             std::ifstream file(entry.path());
 
             if (!file) {
-                std::cerr<< "Warning: failed to open "<< entry.path().string()<< '\n';
+                std::cerr
+                    << "Warning: failed to open "
+                    << entry.path().string()
+                    << '\n';
+
                 continue;
             }
+
+
             std::string line;
+
             while (std::getline(file, line)) {
                 std::smatch match;
+
 
                 bool found = std::regex_search(
                     line,
                     match,
                     commentPattern
                 );
+
+
                 if (!found) {
                     found = std::regex_search(
                         line,
@@ -75,40 +88,49 @@ int main() {
                     );
                 }
 
+
                 if (!found) {
                     continue;
                 }
 
                 const std::string name = match[1].str();
+                std::string TrueName = "";
 
-                const std::size_t separator = name.rfind('-');
-
-                std::string beforeLast;
                 std::string afterLast;
 
-                if (separator == std::string::npos) {
-                    afterLast = name;
-                } else {
-                    beforeLast = name.substr(0, separator);
-                    afterLast = name.substr(separator + 1);
+
+                if (
+                    match.size() > 2 &&
+                    match[2].matched &&
+                    !match[2].str().empty()
+                ) {
+                    TrueName = match[2].str();
                 }
 
-                std::string key;
+                {
+                    const std::size_t separator = name.rfind('/');
 
-                if (!beforeLast.empty()) {
-                    key = beforeLast + "/" + afterLast;
-                } else {
-                    key = afterLast;
+                    if (separator == std::string::npos) {
+                        afterLast = name;
+                    }
+                    else {
+                        afterLast = name.substr(separator + 1);
+                    }
+                    if (TrueName.empty()) {
+                        TrueName = afterLast;
+                    };
                 }
 
-                if (tagSettings.contains(key)) {
+
+                if (tagSettings.contains(name)) {
                     continue;
                 }
 
-                tagSettings[key] = {
+
+                tagSettings[name] = {
                     {
                         "name",
-                        replaceUnderscores(afterLast)
+                        replaceUnderscores(TrueName)
                     },
                     {
                         "description",
@@ -124,16 +146,20 @@ int main() {
                     }
                 };
 
+
                 std::cout
                     << "Found tag: "
                     << name
-                    << " -> "
-                    << key
+                    << " with name "
+                    << TrueName
+                    << "description" << afterLast
                     << '\n';
             }
         }
 
+
         json modData = json::object();
+
 
         if (fs::exists(MERGE_JSON)) {
             std::ifstream input(MERGE_JSON);
@@ -147,9 +173,11 @@ int main() {
                 return 1;
             }
 
+
             try {
                 input >> modData;
-            } catch (const json::parse_error& error) {
+            }
+            catch (const json::parse_error& error) {
                 std::cerr
                     << "Error: failed to parse "
                     << MERGE_JSON
@@ -161,42 +189,71 @@ int main() {
             }
         }
 
-        if (!modData.contains("settings") ||
-            !modData["settings"].is_object()) {
 
-            modData["settings"] = json::object();
+        json existingSettings = json::object();
+
+
+        if (
+            modData.contains("settings") &&
+            modData["settings"].is_object()
+        ) {
+            existingSettings = modData["settings"];
         }
 
-        json& existingSettings = modData["settings"];
-        json newSettings = json::object();
+
+        json mergedSettings = json::object();
 
         bool inserted = false;
 
+
         for (auto& [key, value] : existingSettings.items()) {
+
             if (key == "other-title" && !inserted) {
+
                 for (auto& [newKey, newValue] : tagSettings.items()) {
                     if (!existingSettings.contains(newKey)) {
-                        newSettings[newKey] = newValue;
+                        mergedSettings[newKey] = newValue;
                     }
                 }
 
                 inserted = true;
             }
 
-            newSettings[key] = value;
+
+            mergedSettings[key] = value;
         }
+
 
         if (!inserted) {
             for (auto& [newKey, newValue] : tagSettings.items()) {
                 if (!existingSettings.contains(newKey)) {
-                    newSettings[newKey] = newValue;
+                    mergedSettings[newKey] = newValue;
                 }
             }
         }
 
-        modData["settings"] = std::move(newSettings);
+
+        json outputData = json::object();
+
+
+        for (auto& [key, value] : modData.items()) {
+
+            if (key == "settings") {
+                outputData[key] = std::move(mergedSettings);
+            }
+            else {
+                outputData[key] = value;
+            }
+        }
+
+
+        if (!modData.contains("settings")) {
+            outputData["settings"] = std::move(mergedSettings);
+        }
+
 
         std::ofstream output(OUTPUT_JSON);
+
 
         if (!output) {
             std::cerr
@@ -207,7 +264,9 @@ int main() {
             return 1;
         }
 
-        output << modData.dump(4) << '\n';
+
+        output << outputData.dump(4) << '\n';
+
 
         std::cout
             << "Processed "
@@ -216,8 +275,10 @@ int main() {
             << OUTPUT_JSON
             << '\n';
 
+
         return 0;
     }
+
 
     catch (const fs::filesystem_error& error) {
         std::cerr
@@ -228,6 +289,7 @@ int main() {
         return 1;
     }
 
+
     catch (const json::exception& error) {
         std::cerr
             << "JSON error: "
@@ -236,6 +298,7 @@ int main() {
 
         return 1;
     }
+
 
     catch (const std::exception& error) {
         std::cerr
