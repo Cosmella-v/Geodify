@@ -23,7 +23,7 @@ class FakePopup : public FLAlertLayer {
 	}
 
   protected:
-	bool FakePopup::init(CCLayer *layer) {
+	bool init(CCLayer *layer) {
 		if (!FLAlertLayer::init(150))
 			return false;
 
