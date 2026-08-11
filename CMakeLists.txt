@@ -13,7 +13,7 @@ set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(Geodify VERSION 1.0.0)
 
-add_subdirectory(tools)
+include("${CMAKE_SOURCE_DIR}/tools/CMakeLists.txt")
 
 file(GLOB_RECURSE SOURCES
     CONFIGURE_DEPENDS
@@ -24,11 +24,6 @@ add_library(
     ${PROJECT_NAME}
     SHARED
     ${SOURCES}
-)
-
-add_dependencies(
-    ${PROJECT_NAME}
-    run_tools
 )
 
 if (NOT DEFINED ENV{GEODE_SDK})
