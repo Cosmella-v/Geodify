@@ -297,12 +297,10 @@
     },
     "tags": ["content", "customization", "enhancement", "interface", "offline", "universal"],
     "links": {
-        "community": "https://discord.gg/vK3DuqJwyW",
-        "homepage": "https://omgrod.me",
-        "source": "https://github.com/OmgRod/Geodify"
+        "source": "https://github.com/Cosmella-v/Geodify"
     },
     "issues": {
         "info": "Create an issue or create feature requests on the GitHub repository.",
-        "url": "https://github.com/OmgRod/Geodify/issues"
+        "url": "https://github.com/Cosmella-v/Geodify/issues"
     }
 }

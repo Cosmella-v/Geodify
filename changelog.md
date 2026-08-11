@@ -1,5 +1,10 @@
 # Geodify Changelog
 
+## v3.0.2
+- Owner has been changed to Cosmella due to Omgrod's ban from the index
+- Rewrote small parts of the code
+- mod has been put into update if required.
+- fixed support with geode in pause
 ## v3.0.1
 
 - Fixed Rated Layouts' `RLSearchLayer`
