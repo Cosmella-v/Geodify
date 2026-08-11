@@ -1,5 +1,6 @@
 # Geodify Changelog
-
+## v3.0.3
+- bump
 ## v3.0.2
 - Owner has been changed to Cosmella due to Omgrod's ban from the index
 - Rewrote small parts of the code
