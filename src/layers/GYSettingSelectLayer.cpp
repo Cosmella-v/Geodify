@@ -7,6 +7,7 @@
 #include <string>
 
 #include "GYSettingSelectLayer.hpp"
+#include "fakePopup.hpp"
 #include "GYColorPopup.hpp"
 #include "GYModTile.hpp"
 #include "../SwelvyBG.hpp"
@@ -40,7 +41,7 @@ CCScene* GYSettingSelectLayer::scene() {
     k->m_isPopup = false;
     return scene;
 }
-FakePopup* GYSettingSelectLayer::popup() {
+geode::Popup* GYSettingSelectLayer::popup() {
     auto k = GYSettingSelectLayer::create();
     k->m_isPopup = true;
     return FakePopup::create(k); 
