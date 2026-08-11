@@ -48,7 +48,7 @@ public:
      int getTagFromString(std::string name) {
         auto it = gm_tagMap.find(name);
         if (it != gm_tagMap.end()) {
-            log::debug("Found tag: {}", it->second);
+            //log::debug("Found tag: {}", it->second);
             return it->second;
         }
         log::error("Unknown tag: {}", name);
@@ -58,7 +58,7 @@ public:
     std::string getStringFromTag(int tag) {
         auto it = gm_stringMap.find(tag);
         if (it != gm_stringMap.end()) {
-            log::debug("Found string: {}", it->second);
+            //log::debug("Found string: {}", it->second);
             return it->second;
         }
         log::error("Unknown tag: {}", tag);

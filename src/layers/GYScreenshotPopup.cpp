@@ -99,13 +99,13 @@ bool GYScreenshotPopup::init(int const& layer) {
 std::string GYScreenshotPopup::getPreviewURL() {
     if (m_previewType == PreviewType::Sapphire) {
         return fmt::format(
-            "https://raw.githubusercontent.com/OmgRod/Geodify/master/previews/sapphire/{}Preview.png",
+            "https://raw.githubusercontent.com/Cosmella-v/Geodify/master/previews/sapphire/{}Preview.png",
             m_layerName
         );
     }
 
     return fmt::format(
-        "https://raw.githubusercontent.com/OmgRod/Geodify/master/previews/{}Preview.png",
+        "https://raw.githubusercontent.com/Cosmella-v/Geodify/master/previews/{}Preview.png",
         m_layerName
     );
 }
