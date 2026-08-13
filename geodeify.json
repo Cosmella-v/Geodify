@@ -6,10 +6,10 @@
         "mac": "2.2081",
         "ios": "2.2081"
     },
-    "version": "v3.0.3",
+    "version": "v3.0.4",
     "id": "omgrod.geodify",
     "name": "Geodify",
-    "developers": ["Cosmella-v"],
+    "developers": ["Cosmella-v", "omgrod"],
     "description": "Converts most backgrounds to Geode's background (SwelvyBG).",
     "early-load": true,
     "resources": {
@@ -297,10 +297,10 @@
     },
     "tags": ["content", "customization", "enhancement", "interface", "offline", "universal"],
     "links": {
-        "source": "https://github.com/Cosmella-v/Geodify"
+        "source": "https://github.com/OmgRod/Geodify"
     },
     "issues": {
         "info": "Create an issue or create feature requests on the GitHub repository.",
-        "url": "https://github.com/Cosmella-v/Geodify/issues"
+        "url": "https://github.com/OmgRod/Geodify/issues"
     }
 }

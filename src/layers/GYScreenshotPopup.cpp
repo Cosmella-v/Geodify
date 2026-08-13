@@ -69,7 +69,7 @@ bool GYScreenshotPopup::init(std::string_view layerName) {
             auto reportBtn = CCMenuItemExt::createSpriteExtra(
                 reportSpr,
                 [](CCObject*) {
-                    geode::utils::web::openLinkInBrowser("https://github.com/Cosmella-v/Geodify/issues/new?template=bug_report.md");
+                    geode::utils::web::openLinkInBrowser("https://github.com/OmgRod/Geodify/issues/new?template=bug_report.md");
                 }
             );
 
@@ -98,13 +98,13 @@ bool GYScreenshotPopup::init(std::string_view layerName) {
 std::string GYScreenshotPopup::getPreviewURL() {
     if (m_previewType == PreviewType::Sapphire) {
         return fmt::format(
-            "https://raw.githubusercontent.com/Cosmella-v/Geodify/master/previews/sapphire/{}Preview.png",
+            "https://raw.githubusercontent.com/OmgRod/Geodify/master/previews/sapphire/{}Preview.png",
             m_layerName
         );
     }
 
     return fmt::format(
-        "https://raw.githubusercontent.com/Cosmella-v/Geodify/master/previews/{}Preview.png",
+        "https://raw.githubusercontent.com/OmgRod/Geodify/master/previews/{}Preview.png",
         m_layerName
     );
 }
@@ -271,7 +271,7 @@ void GYScreenshotPopup::createReportButton() {
         reportSpr,
         [](CCObject*) {
             geode::utils::web::openLinkInBrowser(
-                "https://github.com/Cosmella-v/Geodify/issues/new?template=bug_report.md"
+                "https://github.com/OmgRod/Geodify/issues/new?template=bug_report.md"
             );
         }
     );

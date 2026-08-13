@@ -34,10 +34,10 @@ bool GYColorPopup::init() {
 
     this->setTitle("Color Settings");
 
-    auto layerSize = CCSize(winSize.width * 0.75f, winSize.height * 0.75f);
+    auto layerSize = CCSize(winSize.width * 0.75f, winSize.height * 0.9f);
 
-    auto scroll = ScrollLayer::create(layerSize * 0.9f - ccp(layerSize.width * 0.05f, layerSize.height * 0.5f));
-    scroll->setPosition({ layerSize.width * 0.05f, layerSize.height * 0.375f });
+    auto scroll = ScrollLayer::create(layerSize * 0.9f - ccp(layerSize.width * 0.05f, layerSize.height * 0.35f));
+    scroll->setPosition({ layerSize.width * 0.05f, layerSize.height * 0.175f });
     scroll->setTouchEnabled(true);
     CCScale9Sprite* contentBox = CCScale9Sprite::create("square02b_001.png");
     contentBox->setColor(ccColor3B{0, 0, 0});
