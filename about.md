@@ -13,7 +13,7 @@ This mod converts most menus' backgrounds to the Geode one (SwelvyBG). This incl
 Either create an [issue](https://github.com/OmgRod/Geodify/issues) on GitHub for feature requests or bug reports!
 Or contact me on discrod with #cosmella_v
 
-> Please note that the mod may only get updates if issues arise or the game updates!
+> Please note that the mod may only get updates if issues arise! (not including game updates)
 
 ## Credits
 
