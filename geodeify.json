@@ -9,7 +9,7 @@
     "version": "v3.0.4",
     "id": "omgrod.geodify",
     "name": "Geodify",
-    "developers": ["Cosmella-v", "omgrod"],
+    "developers": ["Cosmella-v", "OmgRod"],
     "description": "Converts most backgrounds to Geode's background (SwelvyBG).",
     "early-load": true,
     "resources": {
